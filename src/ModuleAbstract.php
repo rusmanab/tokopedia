@@ -16,10 +16,10 @@ abstract class ModuleAbstract{
         $this->shopId = $this->client->getShopId();
     }
 
-    public function post($uri, $parameters, $methode="POST")
+    public function post($uri, $header = [], $parameters, $methode="POST")
     {
 
-        $request = $this->client->send($uri, $parameters, $methode);
+        $request = $this->client->send($uri,$header, $parameters, $methode);
         return $request;
     }
 }

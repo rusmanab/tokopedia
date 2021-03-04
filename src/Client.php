@@ -76,7 +76,7 @@ class Client{
         return $session;
     }
 
-    public function send($uri,array $header, $data = [], $methode = "POST",$aut=0){
+    public function send($uri,$header = [], $data = [], $methode = "POST",$aut=0){
         if (!$aut){
             $uri = $this->baseUrl . $uri;
         }
