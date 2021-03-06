@@ -5,7 +5,7 @@ use InvalidArgumentException;
 use Rusmanab\Tokopedia\Module\Autentikasi;
 use Rusmanab\Tokopedia\Module\Category;
 use Rusmanab\Tokopedia\Module\Product;
-
+use Rusmanab\Tokopedia\Module\Order;
 class Client{
 
     public const FS_ID          = 14655;
@@ -39,6 +39,7 @@ class Client{
 
         $this->module['product'] = new Product($this);
         $this->module['category'] = new Category($this);
+        $this->module['order'] = new Order($this);
     }
 
     public function getTokenUrl():string
@@ -77,6 +78,7 @@ class Client{
     }
 
     public function send($uri,$header = [], $data = [], $methode = "POST",$aut=0){
+
         if (!$aut){
             $uri = $this->baseUrl . $uri;
         }
@@ -117,5 +119,31 @@ class Client{
         }
 
         return $json_decode;
+    }
+
+    public function printLabel($uri){
+
+        $uri = $this->baseUrl . $uri;
+
+        $header = array(
+            'Content-Type: application/json',
+            'Authorization: '.$this->authorization(),
+            'User-Agent: '. $this->userAgent,
+        );
+
+
+        $connection = curl_init();
+        curl_setopt($connection, CURLOPT_URL, $uri);
+        curl_setopt($connection, CURLOPT_HTTPHEADER, $header);
+        curl_setopt($connection, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($connection, CURLOPT_SSL_VERIFYHOST, 0);
+
+        curl_setopt($connection, CURLOPT_RETURNTRANSFER, 1);
+
+        $response = curl_exec($connection);
+
+        curl_close($connection);
+
+        return $response;
     }
 }

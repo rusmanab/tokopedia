@@ -22,4 +22,9 @@ abstract class ModuleAbstract{
         $request = $this->client->send($uri,$header, $parameters, $methode);
         return $request;
     }
+
+    public function printLabel($uri){
+        $request = $this->client->printLabel($uri);
+        return $request;
+    }
 }
