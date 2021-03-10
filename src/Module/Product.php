@@ -23,14 +23,18 @@ class Product extends ModuleAbstract{
     }
 
 
-    public function getItems($product_id=""){
-        $p = "";
-        if (!empty($product_id)){
-            $p = "?product_id=".$product_id;
-        }
-        //$url = "/v2/products/fs/$this->fsId/1/20".$p;
-        $url = "/inventory/v1/fs/$this->fsId/product/info?shop_id=$this->shopId&page=1&per_page=2&sort=1";
+    public function getItems($parameters = []){
 
+        $page = isset($parameters['page']) ? $parameters['page'] : 1;
+
+        $url = "/inventory/v1/fs/$this->fsId/product/info?shop_id=$this->shopId&page=$page&per_page=5&sort=1";
+
+        return $this->post($url, [],[], "GET");
+    }
+
+    public function getDetail($product_id){
+       
+        $url = "/inventory/v1/fs/$this->fsId/product/info?product_id=$product_id";
         return $this->post($url, [],[], "GET");
     }
 
