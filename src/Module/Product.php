@@ -33,7 +33,7 @@ class Product extends ModuleAbstract{
     }
 
     public function getDetail($product_id){
-       
+
         $url = "/inventory/v1/fs/$this->fsId/product/info?product_id=$product_id";
         return $this->post($url, [],[], "GET");
     }

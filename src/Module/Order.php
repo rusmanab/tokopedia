@@ -7,8 +7,10 @@ class Order extends ModuleAbstract{
     public function getAll($parameter = []){
         $from_date = isset($parameter['from_date']) ? $parameter['from_date'] : strtotime(date(now())) ;
         $to_date   = isset($parameter['to_date']) ? $parameter['to_date'] : strtotime(date(now())) ;
+        $page      = isset($parameter['page']) ? $parameter['page'] : 1;
+        $per_page  = isset($parameter['per_page']) ? $parameter['per_page'] : 5;
 
-        $url = "/v2/order/list?fs_id=$this->fsId&shop_id=$this->shopId&from_date=$from_date&to_date=$to_date&page=1&per_page=1";
+        $url = "/v2/order/list?fs_id=$this->fsId&shop_id=$this->shopId&from_date=$from_date&to_date=$to_date&page=$page&per_page=$per_page";
 
         return $this->post($url, [],$parameter, "GET");
     }
