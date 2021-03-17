@@ -10,10 +10,15 @@ class Product extends ModuleAbstract{
         return $this->post($url,[], $parameters);
     }
 
-    public function getAllEtalase($parameters = []){
+    public function getAllEtalase(){
         $url = "/inventory/v1/fs/$this->fsId/product/etalase?shop_id=$this->shopId";
 
         return $this->post($url, [],[], "GET");
+    }
+
+    public function update($parameters = []){
+        $url = "/v2/products/fs/$this->fsId/edit?shop_id=$this->shopId";
+        return $this->post($url,[], $parameters);
     }
 
     public function getVariant($parameters = []){
