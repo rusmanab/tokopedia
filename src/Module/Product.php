@@ -43,6 +43,11 @@ class Product extends ModuleAbstract{
         return $this->post($url, [],[], "GET");
     }
 
+    public function getVariantProduk($product_id){
+        $url = "/inventory/v1/fs/$this->fsId/product/variant/$product_id";
+        return $this->post($url, [],[], "GET");
+    }
+
     public function setActive($parameter=[]){
         $url = "/v1/products/fs/$this->fsId/active?shop_id=$this->shopId";
         return $this->post($url,[],$parameter);
