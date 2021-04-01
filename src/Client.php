@@ -6,6 +6,8 @@ use Rusmanab\Tokopedia\Module\Autentikasi;
 use Rusmanab\Tokopedia\Module\Category;
 use Rusmanab\Tokopedia\Module\Product;
 use Rusmanab\Tokopedia\Module\Order;
+use Rusmanab\Tokopedia\Module\Webhook;
+
 class Client{
 
     public const FS_ID          = 14655;
@@ -40,6 +42,8 @@ class Client{
         $this->module['product'] = new Product($this);
         $this->module['category'] = new Category($this);
         $this->module['order'] = new Order($this);
+        $this->module['webhook'] = new Webhook($this);
+
     }
 
     public function getTokenUrl():string
