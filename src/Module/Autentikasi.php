@@ -3,7 +3,7 @@ namespace Rusmanab\Tokopedia\Module;
 
 use Rusmanab\Tokopedia\ModuleAbstract;
 use Rusmanab\Tokopedia\Client;
-
+use Session;
 class Autentikasi extends ModuleAbstract{
     protected $client;
 
@@ -23,13 +23,14 @@ class Autentikasi extends ModuleAbstract{
             'Authorization: Basic '.$authorisation,
             'Content-Length: 0'
         );
+        if ( !Session::get('_TokpedAccessToken') ){
+            $response = $this->client->send($url,$headers,[],"POST",1);
+
+            Session::put('_TokpedAccessToken',$response->access_token );
+            Session::put('_TokpedTokenType',$response->token_type ) ;
+        }
 
 
-        $response = $this->client->send($url,$headers,[],"POST",1);
-
-        session(['_TokpedAccessToken' => $response->access_token] );
-        session(['_TokpedTokenType' => $response->token_type ] ) ;
-
-        return $response;
+        return true;
     }
 }

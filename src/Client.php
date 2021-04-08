@@ -7,6 +7,7 @@ use Rusmanab\Tokopedia\Module\Category;
 use Rusmanab\Tokopedia\Module\Product;
 use Rusmanab\Tokopedia\Module\Order;
 use Rusmanab\Tokopedia\Module\Webhook;
+use Session;
 
 class Client{
 
@@ -36,8 +37,11 @@ class Client{
         $this->fsId = self::FS_ID;
         $this->baseUrl = self::BASE_URL;
 
-        $autentikasi = new Autentikasi($this);
-        $autentikasi->generateToken();
+        if ( !Session::get('_TokpedAccessToken') ){
+            $autentikasi = new Autentikasi($this);
+            $autentikasi->generateToken();
+        }
+
 
         $this->module['product'] = new Product($this);
         $this->module['category'] = new Category($this);

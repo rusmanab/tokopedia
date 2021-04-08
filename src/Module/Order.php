@@ -36,10 +36,12 @@ class Order extends ModuleAbstract{
     }
 
     public function accepted($parameter=[]){
-        $order_id    = isset($parameter['order_id']) ? $parameter['order_id'] : '';
+
+        $order_id    = isset($parameter['order_id']) ? (int)$parameter['order_id'] : 0;
 
         $url = "/v1/order/$order_id/fs/$this->fsId/ack";
-        return $this->post($url, [],[], "GET");
+
+        return $this->post($url, [],[],"POST");
     }
     /**
      *

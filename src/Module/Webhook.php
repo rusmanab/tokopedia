@@ -10,10 +10,10 @@ class Webhook extends ModuleAbstract{
         return $this->post($url,[], $parameters);
     }
 
-    public function getAllEtalase(){
+    public function listRegister(){
         $url = "/v1/fs/$this->fsId";
 
-        return $this->get($url, [],[], "GET");
+        return $this->post($url, [],[], "GET");
     }
 
 }
