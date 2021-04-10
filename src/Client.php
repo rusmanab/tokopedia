@@ -8,6 +8,7 @@ use Rusmanab\Tokopedia\Module\Product;
 use Rusmanab\Tokopedia\Module\Order;
 use Rusmanab\Tokopedia\Module\Shop;
 use Rusmanab\Tokopedia\Module\Webhook;
+
 class Client{
 
     public const FS_ID          = 14655;
@@ -30,20 +31,20 @@ class Client{
     public function __construct(Int $shopId)
     {
         $this->tokenUrl = self::TOKEN_URL;
-        $this->clientId = self::CLIENT_ID;
-        $this->clientSecret = self::CLIENT_SECRET;
+        $this->clientId = config('shop.tokopedia_clientid') == NULL ? self::CLIENT_ID : config('shop.tokopedia_clientid');
+        $this->clientSecret = config('shop.tokopedia_secretid') == NULL ? self::CLIENT_SECRET : config('shop.tokopedia_secretid');
         $this->shopId = $shopId;
-        $this->fsId = self::FS_ID;
+        $this->fsId = config('shop.tokopedia_appid') == NULL ? self::FS_ID : config('shop.tokopedia_appid');
         $this->baseUrl = self::BASE_URL;
 
         $autentikasi = new Autentikasi($this);
         $autentikasi->generateToken();
 
-        $this->module['product'] = new Product($this);
-        $this->module['category'] = new Category($this);
-        $this->module['order'] = new Order($this);
-        $this->module['shop'] = new Shop($this);
-        $this->module['webhook'] = new Webhook($this);
+        $this->module['product']    = new Product($this);
+        $this->module['category']   = new Category($this);
+        $this->module['order']      = new Order($this);
+        $this->module['shop']       = new Shop($this);
+        $this->module['webhook']    = new Webhook($this);
 
     }
 
@@ -136,15 +137,12 @@ class Client{
             'User-Agent: '. $this->userAgent,
         );
 
-
         $connection = curl_init();
         curl_setopt($connection, CURLOPT_URL, $uri);
         curl_setopt($connection, CURLOPT_HTTPHEADER, $header);
         curl_setopt($connection, CURLOPT_SSL_VERIFYPEER, 0);
         curl_setopt($connection, CURLOPT_SSL_VERIFYHOST, 0);
-
         curl_setopt($connection, CURLOPT_RETURNTRANSFER, 1);
-
         $response = curl_exec($connection);
 
         curl_close($connection);

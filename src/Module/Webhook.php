@@ -10,10 +10,10 @@ class Webhook extends ModuleAbstract{
         return $this->post($url,[], $parameters);
     }
 
-    public function listRegister(){
+    public function listRegister($parameters = []){
         $url = "/v1/fs/$this->fsId";
 
-        return $this->post($url, [],[], "GET");
+        return $this->post($url, [],[], $parameters, "GET");
     }
 
 }
