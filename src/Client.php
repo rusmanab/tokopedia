@@ -7,6 +7,7 @@ use Rusmanab\Tokopedia\Module\Category;
 use Rusmanab\Tokopedia\Module\Product;
 use Rusmanab\Tokopedia\Module\Order;
 use Rusmanab\Tokopedia\Module\Shop;
+use Rusmanab\Tokopedia\Module\Webhook;
 class Client{
 
     public const FS_ID          = 14655;
@@ -42,6 +43,7 @@ class Client{
         $this->module['category'] = new Category($this);
         $this->module['order'] = new Order($this);
         $this->module['shop'] = new Shop($this);
+        $this->module['webhook'] = new Webhook($this);
 
     }
 
