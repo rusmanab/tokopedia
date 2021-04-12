@@ -77,4 +77,14 @@ class Order extends ModuleAbstract{
         $url = "/inventory/v1/fs/$this->fsI/pick-up";
         return $this->post($url, [],$parameter);
     }
+
+    public function triggerOrderStatus($parameter=[]){
+       
+        /**
+         * order_id 
+         * type => order_status order_notification
+         */
+        $url = "/v1/fs/$this->fsI/trigger";
+        return $this->post($url, [],$parameter);
+    }
 }
