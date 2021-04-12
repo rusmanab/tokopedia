@@ -25,9 +25,13 @@ class Autentikasi extends ModuleAbstract{
         );
         if ( !Session::get('_TokpedAccessToken') ){
             $response = $this->client->send($url,$headers,[],"POST",1);
-
-            Session::put('_TokpedAccessToken',$response->access_token );
-            Session::put('_TokpedTokenType',$response->token_type ) ;
+            if ($response){
+                Session::put('_TokpedAccessToken',$response->access_token );
+                Session::put('_TokpedTokenType',$response->token_type ) ;
+            }else{
+                return false;
+            }
+            
         }
 
 

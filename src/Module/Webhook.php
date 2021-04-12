@@ -16,4 +16,20 @@ class Webhook extends ModuleAbstract{
         return $this->post($url, [],[], $parameters, "GET");
     }
 
+    public function payLoadOrderStatus($parameters = []){
+        
+        $orderId = $parameters['order_id'];
+        
+        $url = "/v1/order/$orderId/fs/$this->fsId/webhook?type=order_status ";
+
+        return $this->post($url, [],[], $parameters, "GET");
+    }
+    public function payLoadOrderNotification($parameters = []){
+        
+        $orderId = $parameters['order_id'];
+        
+        $url = "/v1/order/$orderId/fs/$this->fsId/webhook?type=order_notification ";
+
+        return $this->post($url, [],[], $parameters, "GET");
+    }
 }

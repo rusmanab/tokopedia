@@ -8,6 +8,7 @@ use Rusmanab\Tokopedia\Module\Product;
 use Rusmanab\Tokopedia\Module\Order;
 use Rusmanab\Tokopedia\Module\Shop;
 use Rusmanab\Tokopedia\Module\Webhook;
+use Session;
 
 class Client{
 
@@ -38,13 +39,17 @@ class Client{
         $this->baseUrl = self::BASE_URL;
 
         $autentikasi = new Autentikasi($this);
-        $autentikasi->generateToken();
+        $aut = $autentikasi->generateToken();
+        if (!$aut){
 
-        $this->module['product']    = new Product($this);
-        $this->module['category']   = new Category($this);
-        $this->module['order']      = new Order($this);
-        $this->module['shop']       = new Shop($this);
-        $this->module['webhook']    = new Webhook($this);
+        }else{
+            $this->module['product']    = new Product($this);
+            $this->module['category']   = new Category($this);
+            $this->module['order']      = new Order($this);
+            $this->module['shop']       = new Shop($this);
+            $this->module['webhook']    = new Webhook($this);
+        }
+        
 
     }
 
@@ -78,7 +83,7 @@ class Client{
         return $this->module[$name];
     }
     public function authorization(){
-        $session =  session('_TokpedTokenType'). " ". session('_TokpedAccessToken');
+        $session =  Session('_TokpedTokenType'). " ". Session('_TokpedAccessToken');
 
         return $session;
     }
