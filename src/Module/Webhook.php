@@ -13,7 +13,7 @@ class Webhook extends ModuleAbstract{
     public function listRegister(){
         $url = "/v1/fs/$this->fsId";
 
-        return $this->post($url, [],[], $parameters, "GET");
+        return $this->post($url, [],[], "GET");
     }
 
     public function payLoadOrderStatus($parameters = []){
