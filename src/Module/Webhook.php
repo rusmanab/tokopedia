@@ -10,7 +10,7 @@ class Webhook extends ModuleAbstract{
         return $this->post($url,[], $parameters);
     }
 
-    public function listRegister($parameters = []){
+    public function listRegister(){
         $url = "/v1/fs/$this->fsId";
 
         return $this->post($url, [],[], $parameters, "GET");
@@ -24,7 +24,7 @@ class Webhook extends ModuleAbstract{
 
         return $this->post($url, [],[], $parameters, "GET");
     }
-    public function payLoadOrderNotification($parameters = []){
+    public function payLoadOrderNotification($parameters = []){ 
         
         $orderId = $parameters['order_id'];
         
