@@ -74,7 +74,7 @@ class Order extends ModuleAbstract{
 
     public function requestPickUp($parameter=[]){
         // order_id shop_id
-        $url = "/inventory/v1/fs/$this->fsI/pick-up";
+        $url = "/inventory/v1/fs/$this->fsId/pick-up";
         return $this->post($url, [],$parameter);
     }
 
@@ -84,7 +84,7 @@ class Order extends ModuleAbstract{
          * order_id 
          * type => order_status order_notification
          */
-        $url = "/v1/fs/$this->fsI/trigger";
+        $url = "/v1/fs/$this->fsId/trigger";
         return $this->post($url, [],$parameter);
     }
 }
