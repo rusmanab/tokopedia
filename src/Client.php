@@ -88,6 +88,54 @@ class Client{
         return $session;
     }
 
+    public function webhookSwitch(){
+        $uri = "/v1/fs/$this->fsId/state";
+        $parameter['switcher_webhook'] = true;
+
+        $result = $this->send($uri,[],$parameter);
+        return $result;
+    }
+
+    public function sendPublicKey(){
+
+        $uri = 'https://fs.tokopedia.net/v1/fs/'.$this->fsId.'/register?upload=1';
+
+        $header = array(
+            'Content-Type: multipart/form-data',
+            'Authorization: '.$this->authorization(),
+            'User-Agent: '. $this->userAgent,
+        );
+        $filePath = "/var/www/opensslkey/public_key.txt";
+
+        $filePath = curl_file_create($filePath,"text/plain","public_key");
+
+        $data =array(
+            'public_key' => $filePath
+        );
+        $jsonBody = json_encode($data);
+
+        $connection = curl_init();
+        curl_setopt($connection, CURLOPT_URL, $uri);
+        curl_setopt($connection, CURLOPT_HTTPHEADER, $header);
+        curl_setopt($connection, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($connection, CURLOPT_SSL_VERIFYHOST, 0);
+
+        curl_setopt($connection, CURLOPT_POST, true);
+        curl_setopt($connection, CURLOPT_POSTFIELDS, $jsonBody);
+        curl_setopt($connection, CURLOPT_RETURNTRANSFER, 1);
+
+        $response = curl_exec($connection);
+
+        curl_close($connection);
+
+        if ( $response ){
+            $json_decode = json_decode($response);
+        }else{
+            return false;
+        }
+
+        return $json_decode;
+    }
     public function send($uri,$header = [], $data = [], $methode = "POST",$aut=0){
 
         if (!$aut){
