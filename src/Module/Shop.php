@@ -10,7 +10,11 @@ class Shop extends ModuleAbstract{
         $url = "/v1/shop/fs/$this->fsId/shop-info";
         return $this->post($url,[], $parameters, "GET");
     }
-    
+    public function getAll(){
+
+        $url = "/v1/shop/fs/$this->fsId/shop-info";
+        return $this->post($url,[], [], "GET");
+    }
 
     public function getShowcase($parameters = []){
         $shop_id = $parameters['shop_id'];
