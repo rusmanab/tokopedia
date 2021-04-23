@@ -29,7 +29,7 @@ class Client{
 
     protected $module = [];
 
-    public function __construct(Int $shopId)
+    public function __construct(Int $shopId=0)
     {
         $this->tokenUrl = self::TOKEN_URL;
         $this->clientId = config('shop.tokopedia_clientid') == NULL ? self::CLIENT_ID : config('shop.tokopedia_clientid');
@@ -49,8 +49,6 @@ class Client{
             $this->module['shop']       = new Shop($this);
             $this->module['webhook']    = new Webhook($this);
         }
-        
-
     }
 
     public function getTokenUrl():string
