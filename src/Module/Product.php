@@ -10,6 +10,12 @@ class Product extends ModuleAbstract{
         return $this->post($url,[], $parameters);
     }
 
+    public function addv3($parameters = []){
+        $url = "/v3/products/fs/$this->fsId/create?shop_id=$this->shopId";
+        
+        return $this->post($url,[], $parameters);
+    }
+
     public function getAllEtalase(){
         $url = "/inventory/v1/fs/$this->fsId/product/etalase?shop_id=$this->shopId";
 
@@ -20,6 +26,14 @@ class Product extends ModuleAbstract{
         $url = "/v2/products/fs/$this->fsId/edit?shop_id=$this->shopId";
         return $this->post($url,[], $parameters);
     }
+
+    public function updatev3($parameters = []){
+        $url = "/v3/products/fs/$this->fsId/edit?shop_id=$this->shopId";
+        
+        return $this->post($url,[], $parameters);
+    }
+
+    
 
     public function getVariant($parameters = []){
         $category = $parameters['category_id'];

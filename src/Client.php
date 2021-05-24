@@ -8,6 +8,7 @@ use Rusmanab\Tokopedia\Module\Product;
 use Rusmanab\Tokopedia\Module\Order;
 use Rusmanab\Tokopedia\Module\Shop;
 use Rusmanab\Tokopedia\Module\Webhook;
+use Rusmanab\Tokopedia\Module\Ipwhitelist;
 use Session;
 
 class Client{
@@ -48,6 +49,7 @@ class Client{
             $this->module['order']      = new Order($this);
             $this->module['shop']       = new Shop($this);
             $this->module['webhook']    = new Webhook($this);
+            $this->module['ipwhitelist']    = new Ipwhitelist($this);
         }
     }
 
