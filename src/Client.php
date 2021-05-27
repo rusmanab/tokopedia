@@ -44,6 +44,7 @@ class Client{
         if (!$aut){
 
         }else{
+            $this->module['autentikasi']    = new Autentikasi($this);
             $this->module['product']    = new Product($this);
             $this->module['category']   = new Category($this);
             $this->module['order']      = new Order($this);
