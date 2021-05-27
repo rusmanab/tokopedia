@@ -40,8 +40,8 @@ class Order extends ModuleAbstract{
         $order_id    = isset($parameter['order_id']) ? (int)$parameter['order_id'] : 0;
 
         $url = "/v1/order/$order_id/fs/$this->fsId/ack";
-       
-        return $this->post($url, [],[],"POST");
+        
+        return $this->post($url, [],$parameter);
     }
     /**
      *
