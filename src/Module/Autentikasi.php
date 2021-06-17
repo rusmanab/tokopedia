@@ -24,6 +24,7 @@ class Autentikasi extends ModuleAbstract{
         if ($response){
             Session::put('_TokpedAccessToken',$response->access_token );
             Session::put('_TokpedTokenType',$response->token_type ) ;
+            Session::put('_TokpedExpiresIn',$response->expires_in ) ;
         }
 
         return $response;
@@ -44,10 +45,31 @@ class Autentikasi extends ModuleAbstract{
             if ($response){
                 Session::put('_TokpedAccessToken',$response->access_token );
                 Session::put('_TokpedTokenType',$response->token_type ) ;
+                Session::put('_TokpedExpiresIn',$response->expires_in ) ;
             }else{
                 return false;
+            }            
+        }else{
+            if ( Session::get('_TokpedExpiresIn') ){
+                $now    = strtotime("now");
+                $expire = Session::get('_TokpedExpiresIn');
+                if ( $expire < $now  ){
+                    $response = $this->client->send($url,$headers,[],"POST",1);
+                    if ($response){
+                        Session::put('_TokpedAccessToken',$response->access_token );
+                        Session::put('_TokpedTokenType',$response->token_type ) ;
+                        Session::put('_TokpedExpiresIn',$response->expires_in ) ;
+                    }
+                }
+            }else{
+                $response = $this->client->send($url,$headers,[],"POST",1);
+                if ($response){
+                    Session::put('_TokpedAccessToken',$response->access_token );
+                    Session::put('_TokpedTokenType',$response->token_type ) ;
+                    Session::put('_TokpedExpiresIn',$response->expires_in ) ;
+                }
             }
-            
+           
         }
 
 
