@@ -57,8 +57,8 @@ class Autentikasi extends ModuleAbstract{
                     $response = $this->client->send($url,$headers,[],"POST",1);
                     if ($response){
                         Session::put('_TokpedAccessToken',$response->access_token );
-                        Session::put('_TokpedTokenType',$response->token_type ) ;
-                        Session::put('_TokpedExpiresIn',$response->expires_in ) ;
+                        Session::put('_TokpedTokenType',$response->token_type );
+                        Session::put('_TokpedExpiresIn',$response->expires_in );
                     }
                 }
             }else{

@@ -42,7 +42,7 @@ class Client{
         $autentikasi = new Autentikasi($this);
         $aut = $autentikasi->generateToken();
         if (!$aut){
-
+            
         }else{
             $this->module['autentikasi']    = new Autentikasi($this);
             $this->module['product']    = new Product($this);
