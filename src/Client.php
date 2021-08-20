@@ -13,9 +13,9 @@ use Session;
 
 class Client{
 
-    public const FS_ID          = 14655;
-    public const CLIENT_ID      = "97f50807a11943cc9ad3306b73753fc1";
-    public const CLIENT_SECRET  = "e69f52c4360842d3a4dede0895de8393";
+    public const FS_ID          = 0;
+    public const CLIENT_ID      = "";
+    public const CLIENT_SECRET  = "";
     public const BASE_URL       = "https://fs.tokopedia.net";
     public const TOKEN_URL      = "https://accounts.tokopedia.com/token?grant_type=client_credentials";
 
