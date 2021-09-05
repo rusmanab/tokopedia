@@ -41,17 +41,15 @@ class Client{
 
         $autentikasi = new Autentikasi($this);
         $aut = $autentikasi->generateToken();
-        if (!$aut){
-            
-        }else{
-            $this->module['autentikasi']    = new Autentikasi($this);
-            $this->module['product']    = new Product($this);
-            $this->module['category']   = new Category($this);
-            $this->module['order']      = new Order($this);
-            $this->module['shop']       = new Shop($this);
-            $this->module['webhook']    = new Webhook($this);
-            $this->module['ipwhitelist']    = new Ipwhitelist($this);
-        }
+        
+        $this->module['autentikasi']    = new Autentikasi($this);
+        $this->module['product']    = new Product($this);
+        $this->module['category']   = new Category($this);
+        $this->module['order']      = new Order($this);
+        $this->module['shop']       = new Shop($this);
+        $this->module['webhook']    = new Webhook($this);
+        $this->module['ipwhitelist']    = new Ipwhitelist($this);
+        
     }
 
     public function getTokenUrl():string
