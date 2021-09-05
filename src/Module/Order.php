@@ -72,6 +72,13 @@ class Order extends ModuleAbstract{
 
     }
 
+    public function getCobCod($parameter=[]){
+        // order_id shop_id
+        $order_id    = isset($parameter['order_id']) ? $parameter['order_id'] : '';
+        $shop_id     = isset($parameter['shop_id']) ? $parameter['shop_id'] : '';
+        $url = "/v1/fs/$this->fsId/fulfillment_order?=$order_id&shop_id=$shop_id";
+        return $this->post($url, [],$parameter, "GET");
+    }
     public function requestPickUp($parameter=[]){
         // order_id shop_id
         $url = "/inventory/v1/fs/$this->fsId/pick-up";
