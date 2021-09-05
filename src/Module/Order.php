@@ -40,7 +40,7 @@ class Order extends ModuleAbstract{
         $order_id    = isset($parameter['order_id']) ? (int)$parameter['order_id'] : 0;
 
         $url = "/v1/order/$order_id/fs/$this->fsId/ack";
-        
+
         return $this->post($url, [],$parameter);
     }
     /**
@@ -69,26 +69,33 @@ class Order extends ModuleAbstract{
     }
 
     public function confirmShipping($parameter=[]){
+        $order_id    = isset($parameter['order_id']) ? $parameter['order_id'] : '';
+        $url = "/v1/order/$order_id/fs/$this->fsId/status";
 
+        return $this->post($url, [],$parameter);
     }
 
     public function getCobCod($parameter=[]){
         // order_id shop_id
         $order_id    = isset($parameter['order_id']) ? $parameter['order_id'] : '';
         $shop_id     = isset($parameter['shop_id']) ? $parameter['shop_id'] : '';
-        $url = "/v1/fs/$this->fsId/fulfillment_order?=$order_id&shop_id=$shop_id";
+        $url = "/v1/fs/$this->fsId/fulfillment_order?order_id=$order_id&shop_id=$shop_id";
+
+        //$url = "/v2/logistic/fs/$this->fsId/info?shop_id=$shop_id";
+       // var_dump($url);
         return $this->post($url, [],$parameter, "GET");
     }
     public function requestPickUp($parameter=[]){
         // order_id shop_id
         $url = "/inventory/v1/fs/$this->fsId/pick-up";
+
         return $this->post($url, [],$parameter);
     }
 
     public function triggerOrderStatus($parameter=[]){
-       
+
         /**
-         * order_id 
+         * order_id
          * type => order_status order_notification
          */
         $url = "/v1/fs/$this->fsId/trigger";
