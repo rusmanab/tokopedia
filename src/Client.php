@@ -148,8 +148,10 @@ class Client{
                 'User-Agent: '. $this->userAgent,
             );
         }
-
-        $jsonBody = json_encode($data);
+        if ($methode == "GET"){
+            $uri = $uri . '?' . http_build_query($data);
+        }
+        
 
         $connection = curl_init();
         curl_setopt($connection, CURLOPT_URL, $uri);
@@ -158,6 +160,7 @@ class Client{
         curl_setopt($connection, CURLOPT_SSL_VERIFYHOST, 0);
 
         if ( $methode == "POST" ){
+            $jsonBody = json_encode($data);
             curl_setopt($connection, CURLOPT_POST, true);
             if (count($data) > 0){
                 curl_setopt($connection, CURLOPT_POSTFIELDS, $jsonBody);

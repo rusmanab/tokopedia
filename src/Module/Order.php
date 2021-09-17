@@ -101,4 +101,10 @@ class Order extends ModuleAbstract{
         $url = "/v1/fs/$this->fsId/trigger";
         return $this->post($url, [],$parameter);
     }
+
+    public function getSaldoHistory($parameter=[]){
+
+        $url = "/v1/fs/$this->fsId/shop/$this->shopId/saldo-history"; ;
+        return $this->post($url, [],$parameter, "GET");
+    }
 }
