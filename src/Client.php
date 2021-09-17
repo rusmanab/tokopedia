@@ -149,7 +149,9 @@ class Client{
             );
         }
         if ($methode == "GET"){
-            $uri = $uri . '?' . http_build_query($data);
+            if (  count($data) > 0 ){
+                $uri = $uri . '?' . http_build_query($data);
+            }
         }
         
 
