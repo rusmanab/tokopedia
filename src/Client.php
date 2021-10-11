@@ -9,6 +9,7 @@ use Rusmanab\Tokopedia\Module\Order;
 use Rusmanab\Tokopedia\Module\Shop;
 use Rusmanab\Tokopedia\Module\Webhook;
 use Rusmanab\Tokopedia\Module\Ipwhitelist;
+use Rusmanab\Tokopedia\Module\Logistic;
 use session;
 
 class Client{
@@ -46,6 +47,7 @@ class Client{
         $this->module['autentikasi']->generateToken();
 
         $this->module['product']    = new Product($this);
+        $this->module['logistic']   = new Logistic($this);
         $this->module['category']   = new Category($this);
         $this->module['order']      = new Order($this);
         $this->module['shop']       = new Shop($this);
