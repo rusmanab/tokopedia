@@ -20,12 +20,7 @@ class Autentikasi extends ModuleAbstract{
             'Authorization: Basic '.$authorisation,
             'Content-Length: 0'
         );
-        $response = $this->client->send($url,$headers,[],"POST",1);
-        if ($response){
-            Session::put('_TokpedAccessToken',$response->access_token );
-            Session::put('_TokpedTokenType',$response->token_type ) ;
-            Session::put('_TokpedExpiresIn',$response->expires_in ) ;
-        }
+        $response = $this->client->send($url,$headers,[],"POST",1);       
 
         return $response;
     }

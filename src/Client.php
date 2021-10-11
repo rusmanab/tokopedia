@@ -9,7 +9,7 @@ use Rusmanab\Tokopedia\Module\Order;
 use Rusmanab\Tokopedia\Module\Shop;
 use Rusmanab\Tokopedia\Module\Webhook;
 use Rusmanab\Tokopedia\Module\Ipwhitelist;
-use Session;
+use session;
 
 class Client{
 
@@ -39,10 +39,12 @@ class Client{
         $this->fsId = config('shop.tokopedia_appid') == NULL ? self::FS_ID : config('shop.tokopedia_appid');
         $this->baseUrl = self::BASE_URL;
 
-        $autentikasi = new Autentikasi($this);
-        $aut = $autentikasi->generateToken();
+        /*$autentikasi = new Autentikasi($this);
+        $aut = $autentikasi->generateToken();*/
         
-        $this->module['autentikasi']    = new Autentikasi($this);
+        $this->module['autentikasi']= new Autentikasi($this);
+        $this->module['autentikasi']->generateToken();
+
         $this->module['product']    = new Product($this);
         $this->module['category']   = new Category($this);
         $this->module['order']      = new Order($this);
@@ -82,7 +84,7 @@ class Client{
         return $this->module[$name];
     }
     public function authorization(){
-        $session =  Session('_TokpedTokenType'). " ". Session('_TokpedAccessToken');
+        $session =  session('_TokpedTokenType'). " ". session('_TokpedAccessToken');
 
         return $session;
     }
