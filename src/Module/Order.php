@@ -9,7 +9,8 @@ class Order extends ModuleAbstract{
         $to_date   = isset($parameter['to_date']) ? $parameter['to_date'] : strtotime(date(now())) ;
         $page      = isset($parameter['page']) ? $parameter['page'] : 1;
         $per_page  = isset($parameter['per_page']) ? $parameter['per_page'] : 5;*/
-
+        $parameter['fs_id'] = $this->fsId;
+        $parameter['shop_id'] = $this->shopId;
         $url = "/v2/order/list"; //?fs_id=$this->fsId&shop_id=$this->shopId&from_date=$from_date&to_date=$to_date&page=$page&per_page=$per_page";
 
         return $this->post($url, [],$parameter, "GET");
