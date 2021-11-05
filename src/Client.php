@@ -28,7 +28,7 @@ class Client{
     protected $fsId;
     protected $baseUrl;
     protected $userAgent = "soco-tokped";
-
+    protected $token;
     protected $module = [];
 
     public function __construct(Int $shopId=0)
@@ -85,9 +85,14 @@ class Client{
 
         return $this->module[$name];
     }
+    public function setToken(String $token){
+        $this->token = $token;
+    }
     public function authorization(){
         $session =  session('_TokpedTokenType'). " ". session('_TokpedAccessToken');
-
+        if (!$session){
+            $session = $this->token;
+        }
         return $session;
     }
 
