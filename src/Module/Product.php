@@ -12,7 +12,7 @@ class Product extends ModuleAbstract{
 
     public function addv3($parameters = []){
         $url = "/v3/products/fs/$this->fsId/create?shop_id=$this->shopId";
-        
+
         return $this->post($url,[], $parameters);
     }
 
@@ -29,11 +29,11 @@ class Product extends ModuleAbstract{
 
     public function updatev3($parameters = []){
         $url = "/v3/products/fs/$this->fsId/edit?shop_id=$this->shopId";
-        
-        return $this->post($url,[], $parameters);
+
+        return $this->post($url,[], $parameters, "PATCH");
     }
 
-    
+
 
     public function getVariant($parameters = []){
         $category = $parameters['category_id'];
@@ -44,9 +44,9 @@ class Product extends ModuleAbstract{
 
     public function getItems($parameters = []){
 
-        $page = isset($parameters['page']) ? $parameters['page'] : 1;
-
-        $url = "/inventory/v1/fs/$this->fsId/product/info?shop_id=$this->shopId&page=$page&per_page=5&sort=1";
+        $page    = isset($parameters['page']) ? $parameters['page'] : 1;
+        $per_page= isset($parameters['per_page']) ? $parameters['per_page'] : 5;
+        $url = "/inventory/v1/fs/$this->fsId/product/info?shop_id=$this->shopId&page=$page&per_page=$per_page&sort=1";
 
         return $this->post($url, [],[], "GET");
     }

@@ -20,7 +20,7 @@ class Chat extends ModuleAbstract{
     }
 
     public function init($parameter = []){
-        
+
         $url = "/v1/chat/fs/$this->fsId/initiate";
         return $this->post($url,[], $parameter, "GET");
     }
@@ -28,6 +28,6 @@ class Chat extends ModuleAbstract{
     public function sendReply($parameter = []){
         $msg_id = $parameter['msg_id'];
         $url = "/v1/chat/fs/$this->fsId/messages/$msg_id/reply";
-        return $this->post($url,[], $parameter);
+        return $this->post($url,[], $parameter, "POST");
     }
 }

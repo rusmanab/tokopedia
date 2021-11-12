@@ -10,6 +10,7 @@ use Rusmanab\Tokopedia\Module\Shop;
 use Rusmanab\Tokopedia\Module\Webhook;
 use Rusmanab\Tokopedia\Module\Ipwhitelist;
 use Rusmanab\Tokopedia\Module\Logistic;
+use Rusmanab\Tokopedia\Module\Chat;
 use session;
 
 class Client{
@@ -42,18 +43,19 @@ class Client{
 
         /*$autentikasi = new Autentikasi($this);
         $aut = $autentikasi->generateToken();*/
-        
+
         $this->module['autentikasi']= new Autentikasi($this);
-        $this->module['autentikasi']->generateToken();
+        //$this->module['autentikasi']->generateToken();
 
         $this->module['product']    = new Product($this);
+        $this->module['chat']    = new Chat($this);
         $this->module['logistic']   = new Logistic($this);
         $this->module['category']   = new Category($this);
         $this->module['order']      = new Order($this);
         $this->module['shop']       = new Shop($this);
         $this->module['webhook']    = new Webhook($this);
         $this->module['ipwhitelist']    = new Ipwhitelist($this);
-        
+
     }
 
     public function getTokenUrl():string
@@ -86,13 +88,14 @@ class Client{
         return $this->module[$name];
     }
     public function setToken(String $token){
-        $this->token = $token;
+        $this->token = "Bearer ". $token;
     }
     public function authorization(){
         $session =  session('_TokpedTokenType'). " ". session('_TokpedAccessToken');
         if (!$session){
             $session = $this->token;
         }
+
         return $session;
     }
 
@@ -162,7 +165,7 @@ class Client{
                 $uri = $uri . '?' . http_build_query($data);
             }
         }
-        
+
 
         $connection = curl_init();
         curl_setopt($connection, CURLOPT_URL, $uri);
@@ -173,10 +176,15 @@ class Client{
         if ( $methode == "POST" ){
             $jsonBody = json_encode($data);
             curl_setopt($connection, CURLOPT_POST, true);
+
             if (count($data) > 0){
                 curl_setopt($connection, CURLOPT_POSTFIELDS, $jsonBody);
             }
-
+        }
+        if ($methode == "PATCH"){
+            $jsonBody = json_encode($data);
+            curl_setopt($connection, CURLOPT_CUSTOMREQUEST, "PATCH");
+            curl_setopt($connection, CURLOPT_POSTFIELDS, $jsonBody);
         }
         curl_setopt($connection, CURLOPT_RETURNTRANSFER, 1);
 
