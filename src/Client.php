@@ -91,12 +91,15 @@ class Client{
         $this->token = "Bearer ". $token;
     }
     public function authorization(){
+        $_TokpedAccessToken = session('_TokpedAccessToken');
         $session =  session('_TokpedTokenType'). " ". session('_TokpedAccessToken');
-        if (!$session){
+
+        if (!$_TokpedAccessToken){
             $session = $this->token;
         }
 
         return $session;
+        
     }
 
     public function webhookSwitch(){
