@@ -33,8 +33,6 @@ class Product extends ModuleAbstract{
         return $this->post($url,[], $parameters, "PATCH");
     }
 
-
-
     public function getVariant($parameters = []){
         $category = $parameters['category_id'];
         $url = "/inventory/v1/fs/$this->fsId/category/get_variant?cat_id=$category";
@@ -45,8 +43,11 @@ class Product extends ModuleAbstract{
         $category = $parameters['category_id'];
        
         $url = "/inventory/v2/fs/$this->fsId/category/get_variant?cat_id=$category";
-
         return $this->post($url, [],[], "GET");
+    }
+
+    public function test(){
+        
     }
 
     public function getItems($parameters = []){
