@@ -41,6 +41,13 @@ class Product extends ModuleAbstract{
         return $this->post($url, [],[], "GET");
     }
 
+    public function getVariantV2($parameters = []){
+        $category = $parameters['category_id'];
+       
+        $url = "/inventory/v2/fs/$this->fsId/category/get_variant?cat_id=$category";
+
+        return $this->post($url, [],[], "GET");
+    }
 
     public function getItems($parameters = []){
 
