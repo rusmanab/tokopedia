@@ -46,10 +46,6 @@ class Product extends ModuleAbstract{
         return $this->post($url, [],[], "GET");
     }
 
-    public function test(){
-        
-    }
-
     public function getItems($parameters = []){
 
         $page    = isset($parameters['page']) ? $parameters['page'] : 1;
