@@ -96,4 +96,11 @@ class Product extends ModuleAbstract{
         $url = "/v2/products/fs/$this->fsId/status/$uploadId?shop_id=$this->shopId";
         return $this->post($url,[], [], "GET");
     }
+
+    public function getAnnotation($parameters = []){
+        $category = $parameters['category_id'];
+        
+        $url = "/v1/fs/$this->fsId/product/annotation?cat_id=$category";
+        return $this->post($url, [],[], "GET");
+    }
 }
